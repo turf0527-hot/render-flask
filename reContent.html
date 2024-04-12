@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>药品名称匹配</title>
+</head>
+<body>
+    <form action="/reContent" method="post">
+        <label for="message">药品名称:</label>
+        <textarea id="content_text" name="content_text" rows="4" cols="50" placeholder="这里可以输入Excel中需要匹配的药品名称..."></textarea>
+        <input type="submit" value="提交">
+      </form>
+      <br>
+      <h3 style="text-align:center">药品名称过滤匹配结果</h3>
+        <ur>
+            {% for dt in data %}
+                <li>
+                {% for d in dt %}
+                    {{ d }};
+                {% endfor %}
+                </li>
+            {% endfor %}
+        </ur>
+</body>
+</html>
