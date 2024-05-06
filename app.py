@@ -2,6 +2,10 @@ from flask import Flask
 from flask import render_template, redirect, url_for, Blueprint, request, jsonify
 from utils import AbsUtils
 import requests
+from flask_apscheduler import APScheduler
+
+# 实例化 APScheduler
+scheduler = APScheduler()
 
 app = Flask(__name__)
 
@@ -54,5 +58,14 @@ def js_get_list():
         res = response.json()
     return res
 
+
+
+@scheduler.task('interval', id='job_1', args=(1,2),seconds=5)
+def job1(a, b):  # 运行的定时任务的函数
+    print(str(a) + ' ' + str(b))
+    return a + b
+
+
 if __name__ == '__main__':
+    scheduler.start()  # 启动任务列表
     app.run(host="0.0.0.0", port=5000,debug=True)
